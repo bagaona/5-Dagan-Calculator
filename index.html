@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+			<!-- my changes -->
+			.col-5 {-ms-flex: 5%; /* IE10 */ flex: 5%;}
+			.col-10 {-ms-flex: 10%; /* IE10 */ flex: 10%;}
+			.col-20 {-ms-flex: 20%; /* IE10 */ flex: 20%;}
+			.col-33 {-ms-flex: 33%; /* IE10 */ flex: 33%;}
+			.col-40 {-ms-flex: 40%; /* IE10 */ flex: 33%;}
+			.col-45 {-ms-flex: 45%; /* IE10 */ flex: 45%;}
+			<!-- until here -->
+      body {
+      font-family: Arial;
+      font-size: 17px;
+      padding: 8px;
+      }
+      * {
+      box-sizing: border-box;
+      }
+      .row {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap; /* IE10 */
+      flex-wrap: wrap;
+      margin: 0 -16px;
+      }
+      .col-25 {
+      -ms-flex: 25%; /* IE10 */
+      flex: 25%;
+      }
+      .col-50 {
+      -ms-flex: 50%; /* IE10 */
+      flex: 50%;
+      }
+      .col-75 {
+      -ms-flex: 75%; /* IE10 */
+      flex: 75%;
+      }
+      .col-25,
+      .col-50,
+      .col-75 {
+      padding: 0 16px;
+      }
+      .container {
+      background-color: #f2f2f2;
+      padding: 5px 20px 15px 20px;
+      border: 1px solid lightgrey;
+      border-radius: 3px;
+      }
+      <!-- input[type=text] { -->
+      <!-- width: 30%; -->
+      <!-- margin-bottom: 20px; -->
+      <!-- padding: 12px; -->
+      <!-- border: 1px solid #ccc; -->
+      <!-- border-radius: 3px; -->
+      <!-- } -->
+      label {
+      margin-bottom: 10px;
+      display: block;
+      }
+      .icon-container {
+      margin-bottom: 20px;
+      padding: 7px 0;
+      font-size: 24px;
+      }
+      .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      width: 100%;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 17px;
+      }
+      .btn:hover {
+      background-color: #45a049;
+      }
+      a {
+      color: #2196F3;
+      }
+      hr {
+      border: 1px solid lightgrey;
+      }
+      span.right {
+      float: right;
+      }
+      span.price {
+      float: right;
+      color: grey;
+      }
+      span.prices {
+      float: right;
+      color: grey;
+      }
+      span.cart-item {
+      float: right;
+      color: grey;
+      }
+      span.cart-price {
+      color: grey;
+      }
+      add_table {
+      border-collapse: collapse;
+      }
+      input:focus::placeholder {
+      color: transparent;
+      }
+      /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+      @media (max-width: 800px) {
+      .row {
+      flex-direction: column-reverse;
+      }
+      .col-25 {
+      margin-bottom: 20px;
+      }
+      }
+      .dropdown-check-list {
+      display: inline-block;
+      }
+      .dropdown-check-list .anchor {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      padding: 5px 50px 5px 10px;
+      border: 1px solid #ccc;
+      }
+      .dropdown-check-list .anchor:after {
+      position: absolute;
+      content: "";
+      border-left: 2px solid black;
+      border-top: 2px solid black;
+      padding: 5px;
+      right: 10px;
+      top: 20%;
+      -moz-transform: rotate(-135deg);
+      -ms-transform: rotate(-135deg);
+      -o-transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+      }
+      .dropdown-check-list .anchor:active:after {
+      right: 8px;
+      top: 21%;
+      }
+      .dropdown-check-list ul.participants {
+      padding: 2px;
+      display: none;
+      margin: 0;
+      border: 1px solid #ccc;
+      border-top: none;
+      }
+      .dropdown-check-list ul.participants li {
+      list-style: none;
+      }
+      .close {
+      cursor: pointer;
+      padding: 2px 3px;
+      }
+      .close:hover {background: #bbb;}
+	  
+		
+
+	/* Style the counter cards */
+	.card {
+	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+	}
+	.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+    </style>
+  </head>
+  <body>
+    <h2>Responsive Checkout Form</h2>
+    <p>Resize the browser window to see the effect. When the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other.</p>
+    <div class="row">
+      <div class="col-75">
+		<!-- <div class="container"> -->
+			<div id="ps_location" class="row ps_location">
+				
+			  <!-- <div class="col-50"> -->
+				<!-- <h3>Billing Address</h3> -->
+				<!-- <h3>aaaa</h3> -->
+			  <!-- </div> -->
+				<!-- <div class="col-50"> -->
+				<!-- <h3>Billing Address</h3> -->
+				<!-- <h3>bbb</h3> -->
+				<!-- </div> -->
+				<!-- <div class="col-50"> -->
+				<!-- <h3>Billing Address</h3> -->
+				<!-- <h3>cccc</h3> -->
+				<!-- </div> -->
+				<!-- <div class="col-50"> -->
+				<!-- <h3>Billing Address</h3> -->
+				<!-- <h3>dddd</h3> -->
+			  <!-- </div> -->
+			</div>
+		<!-- </div> -->
+      </div>
+      <div class="col-25">
+        <div class="container">
+          <h3>
+            <center>רשימת הקניות</center>
+          </h3>
+          <div class="cart-items">
+            <h4><i class="fa fa-shopping-cart"></i> <b id = "total_items">0</b> <span class="prices" style="color:black">מוצרים</span></h4>
+            <!-- <p><a href="#">Product 1</a> <span class="price">$15</span></p> -->
+            <!-- <p><a href="#">Product 2</a> <span class="price">$5</span></p> -->
+            <!-- <p><a href="#">Product 3</a> <span class="price">$8</span></p> -->
+            <!-- <p><a href="#">Product 4</a> <span class="price">$2</span></p> -->
+          </div>
+          <hr>
+          <p><b>₪<span id = "total_price">0</span></b><span class="prices" style="color:black"><b>סה"כ</b></span></p>
+          <button id="a" onclick="displayTable()">הוספת פריט</button>
+          <br> <br>
+          <div class="bottomLine" id ="bottom_line" style = "display : none;">
+            <table class="add_table">
+              <tr>
+                <td><input type='text' dir="rtl" placeholder="שם המוצר" id="itemName"/></td>
+                <td>:תיאור/שם</td>
+              </tr>
+              <tr>
+                <td><input dir="rtl" type='text' placeholder="לדוגמה: 0 או 9.90" id="itemPrice"/></td>
+                <td>:מחיר</td>
+              </tr>
+			  <tr>
+			  <td>
+			      <button onclick="addElement(document.getElementById('itemName').value, document.getElementById('itemPrice').value)">!הוספה</button>
+			  </td>
+			  </tr>
+            </table>
+            <div style="color:red;" id="error_item_div"></div>
+          </div>
+        </div>
+        <!-- end of container -->	
+      </div>
+      <!-- end of 25 -->
+    </div>
+    <!-- end of row -->
+    <br>
+    <div class="row">
+    <div class="col-75">
+    </div>
+    <div class="col-25">
+      <div class="container">
+        <div id="list1" class="dropdown-check-list" tabindex="100">
+          <span class="anchor">?מי המשתתפים</span>
+          <ul id="participants" class="participants">
+            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />טל</li>
+            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />אפרת</li>
+            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />עידית</li>
+            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />שרי</li>
+            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() />ישי</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+	<!-- global scope -->
+	createCheckList();
+	updateParticipantsCards()
+		
+	  
+	  <!-- functions -->
+	  
+	  function updateParticipantsCards() {
+	  var participants_locations = document.getElementsByClassName('ps_location')[0]
+		participants_locations.innerHTML = ""
+		var ps = document.getElementsByClassName('participant')		
+		for (i = 0; i < ps.length; i++) {
+		var element = ps[i]
+		var box = element.getElementsByClassName("p_chkbox")[0]
+		if(!box.checked) continue;
+		var text = element.innerText || element.textContent;
+			
+			
+			var insertRow = document.createElement('div')
+			insertRow.className = "column card"
+			
+			<!-- row content -->
+			var rowContent =
+			`
+				<h3>${text}</h3>
+				<h3>aaaa</h3>
+			`
+			insertRow.innerHTML = rowContent
+			<!-- var insertSpace = document.createElement('div') -->
+			
+			
+          participants_locations.append(insertRow)
+			
+		}
+	  }
+	  
+	  function createCheckList() {
+      var checkList = document.getElementById('list1');
+      var participants = document.getElementById('participants');
+              checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+                  if (participants.classList.contains('visible')){
+                      participants.classList.remove('visible');
+                      participants.style.display = "none";
+                  }
+                  
+                  else{
+                      participants.classList.add('visible');
+                      participants.style.display = "block";
+                  }
+                  
+                  
+              }
+      
+              participants.onblur = function(evt) {
+                  participants.classList.remove('visible');
+              }	 			  
+	  }
+      
+      
+      function displayTable() {
+      console.log("Hello world1!");
+        var x = document.getElementById("bottom_line");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      
+      function addElement(itemName, itemPrice) {
+      	document.getElementById("error_item_div").innerHTML = ""
+      	if (itemName == null || itemName == "") {
+      		console.log(2);
+      		document.getElementById("error_item_div").innerHTML = "!נא לכתוב את שם המוצר"
+      		return
+      	}
+      	if (itemPrice == null || itemPrice == "") {
+      		console.log(3);
+      		document.getElementById("error_item_div").innerHTML = "!נא לכתוב את מחיר המוצר"
+      		return
+      	}
+      	var cartRow = document.createElement('div')
+      	var cartItems = document.getElementsByClassName('cart-items')[0]
+      	var cartRowContents = `
+      	<p>₪ <span class="cart-price">${itemPrice}</span><span class="cart-item"><span class="close">&times;</span><a href="#">${itemName}</a></span></p>`
+      	cartRow.innerHTML = cartRowContents
+          cartItems.append(cartRow)
+      	
+      	setCloseAction()
+      
+        update()
+      }
+      
+      function setCloseAction() {
+      	var closebtns = document.getElementsByClassName("close");
+      	var i;
+      
+      	for (i = 0; i < closebtns.length; i++) {
+      	  closebtns[i].addEventListener("click", function() {
+      	  try {
+      		this.parentElement.parentElement.style.display = 'none';
+      		this.parentElement.parentElement.innerHTML = "";
+      		update()
+      		}
+      		catch(err) {
+      		}	
+      	  });
+      	}
+      }
+      function update() {
+      	
+      	<!-- update total items -->
+      	var cartItems = document.getElementsByClassName('cart-items')[0]
+      	var cartItemNames = cartItems.getElementsByClassName('cart-price')
+      	document.getElementById("total_items").innerHTML = cartItemNames.length
+      	
+      	<!-- update total price -->
+      	var sum = 0
+      	for (var i = 0; i < cartItemNames.length; i++) {
+              sum += parseFloat(cartItemNames[i].innerHTML);
+          }
+      	document.getElementById("total_price").innerHTML = sum.toFixed(2)
+      }
+    </script>
+  </body>
+</html>
