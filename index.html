@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-			<!-- my changes -->
+			/* <!-- my changes --> */
 			.col-5 {-ms-flex: 5%; /* IE10 */ flex: 5%;}
 			.col-10 {-ms-flex: 10%; /* IE10 */ flex: 10%;}
 			.col-20 {-ms-flex: 20%; /* IE10 */ flex: 20%;}
 			.col-33 {-ms-flex: 33%; /* IE10 */ flex: 33%;}
 			.col-40 {-ms-flex: 40%; /* IE10 */ flex: 33%;}
-			.col-45 {-ms-flex: 45%; /* IE10 */ flex: 45%;}
-			<!-- until here -->
+			.col-45 {-ms-flex: 40%; /* IE10 */ flex: 40%; margin: 10px;}
+			/* <!-- until here --> */
       body {
       font-family: Arial;
       font-size: 17px;
@@ -50,13 +50,13 @@
       border: 1px solid lightgrey;
       border-radius: 3px;
       }
-      <!-- input[type=text] { -->
+      /* <!-- input[type=text] { -->
       <!-- width: 30%; -->
       <!-- margin-bottom: 20px; -->
       <!-- padding: 12px; -->
       <!-- border: 1px solid #ccc; -->
       <!-- border-radius: 3px; -->
-      <!-- } -->
+      <!-- } --> */
       label {
       margin-bottom: 10px;
       display: block;
@@ -162,232 +162,338 @@
       padding: 2px 3px;
       }
       .close:hover {background: #bbb;}
-	  
-		
-
-	/* Style the counter cards */
-	.card {
-	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  text-align: center;
-  background-color: #f1f1f1;
-	}
-	.column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
+			
+			
+			
+			/* Style the counter cards */
+			.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			padding: 16px;
+			text-align: center;
+			background-color: #f1f1f1;
+      background-image:
+      linear-gradient(150deg, #FFEFBA, #FFFFFF 100%);
+      background-clip: padding-box; /*The frame */
+			}
+			
+	.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
 }
-    </style>
-  </head>
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: linear-gradient(150deg, #9CECFB, #a1d6f0, #9CECFB 100%);
+  background: linear-gradient(150deg, #FFEFBA, #FFFFFF 100%);
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background: linear-gradient(150deg, #9CECFB, #65C7F7, #3a7ff0 100%);
+  /* background-color: rgb(243, 208, 131); */
+  color: black;
+  transform: rotateY(180deg);
+}
+
+.expense {
+  color: red;
+}
+
+.income {
+  color: green;
+}			
+			
+			
+		</style>
+	</head>
   <body>
     <h2>Responsive Checkout Form</h2>
     <p>Resize the browser window to see the effect. When the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other.</p>
     <div class="row">
       <div class="col-75">
-		<!-- <div class="container"> -->
-			<div id="ps_location" class="row ps_location">
-				
-			  <!-- <div class="col-50"> -->
-				<!-- <h3>Billing Address</h3> -->
-				<!-- <h3>aaaa</h3> -->
-			  <!-- </div> -->
-				<!-- <div class="col-50"> -->
-				<!-- <h3>Billing Address</h3> -->
-				<!-- <h3>bbb</h3> -->
+				<!-- <div class="container"> -->
+				<div id="ps_location" class="row ps_location">
+					
+					<!-- <div class="col-50"> -->
+					<!-- <h3>Billing Address</h3> -->
+					<!-- <h3>aaaa</h3> -->
+					<!-- </div> -->
+					<!-- <div class="col-50"> -->
+					<!-- <h3>Billing Address</h3> -->
+					<!-- <h3>bbb</h3> -->
+					<!-- </div> -->
+					<!-- <div class="col-50"> -->
+					<!-- <h3>Billing Address</h3> -->
+					<!-- <h3>cccc</h3> -->
+					<!-- </div> -->
+					<!-- <div class="col-50"> -->
+					<!-- <h3>Billing Address</h3> -->
+					<!-- <h3>dddd</h3> -->
+					<!-- </div> -->
+				</div>
 				<!-- </div> -->
-				<!-- <div class="col-50"> -->
-				<!-- <h3>Billing Address</h3> -->
-				<!-- <h3>cccc</h3> -->
-				<!-- </div> -->
-				<!-- <div class="col-50"> -->
-				<!-- <h3>Billing Address</h3> -->
-				<!-- <h3>dddd</h3> -->
-			  <!-- </div> -->
 			</div>
-		<!-- </div> -->
-      </div>
       <div class="col-25">
         <div class="container">
           <h3>
             <center>רשימת הקניות</center>
-          </h3>
+					</h3>
           <div class="cart-items">
             <h4><i class="fa fa-shopping-cart"></i> <b id = "total_items">0</b> <span class="prices" style="color:black">מוצרים</span></h4>
             <!-- <p><a href="#">Product 1</a> <span class="price">$15</span></p> -->
             <!-- <p><a href="#">Product 2</a> <span class="price">$5</span></p> -->
             <!-- <p><a href="#">Product 3</a> <span class="price">$8</span></p> -->
             <!-- <p><a href="#">Product 4</a> <span class="price">$2</span></p> -->
-          </div>
+					</div>
           <hr>
           <p><b>₪<span id = "total_price">0</span></b><span class="prices" style="color:black"><b>סה"כ</b></span></p>
-          <button id="a" onclick="displayTable()">הוספת פריט</button>
-          <br> <br>
+          <!-- <button id="a" onclick="displayTable()">הוספת פריט</button> -->
+          <div id="add_items_button" class="dropdown-check-list" tabindex="100">
+						<span class="anchor" onclick="displayTable()">הוספת פריט</span>
+          </div>
+          <br>
           <div class="bottomLine" id ="bottom_line" style = "display : none;">
             <table class="add_table">
               <tr>
                 <td><input type='text' dir="rtl" placeholder="שם המוצר" id="itemName"/></td>
                 <td>:תיאור/שם</td>
-              </tr>
+							</tr>
               <tr>
                 <td><input dir="rtl" type='text' placeholder="לדוגמה: 0 או 9.90" id="itemPrice"/></td>
                 <td>:מחיר</td>
-              </tr>
-			  <tr>
-			  <td>
-			      <button onclick="addElement(document.getElementById('itemName').value, document.getElementById('itemPrice').value)">!הוספה</button>
-			  </td>
-			  </tr>
-            </table>
+							</tr>
+							<tr>
+								<td>
+									<button onclick="addElement(document.getElementById('itemName').value, document.getElementById('itemPrice').value)">!הוספה</button>
+								</td>
+							</tr>
+						</table>
             <div style="color:red;" id="error_item_div"></div>
-          </div>
-        </div>
-        <!-- end of container -->	
-      </div>
-      <!-- end of 25 -->
-    </div>
-    <!-- end of row -->
-    <br>
-    <div class="row">
-    <div class="col-75">
-    </div>
-    <div class="col-25">
-      <div class="container">
-        <div id="list1" class="dropdown-check-list" tabindex="100">
-          <span class="anchor">?מי המשתתפים</span>
-          <ul id="participants" class="participants">
-            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />טל</li>
-            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />אפרת</li>
-            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />עידית</li>
-            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />שרי</li>
-            <li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() />ישי</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <script>
-	<!-- global scope -->
-	createCheckList();
-	updateParticipantsCards()
+					</div> <!-- end of bottomLine -->
+				</div> <!-- end of container -->
+        	
+				<br>
+				<!-- Who participate part -->
+				<div class="container">
+				<div id="list1" class="dropdown-check-list" tabindex="100">
+						<span class="anchor" id="ps_anchor">?מי המשתתפים</span>
+						<ul id="participants" class="participants">
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />טל</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />אפרת</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />עידית</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />שרי</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() />ישי</li>
+						</ul>
+					</div>
+          <br>
+          <p><b>₪<span id = "each_ps_price">0</span></b><span class="prices" style="color:black"><b>:סה"כ לכל אחד</b></span></p>
+				</div> <!-- end of container -->
+				
+			</div> <!-- end of 25 -->      
+		</div> <!-- end of row -->
 		
-	  
-	  <!-- functions -->
-	  
-	  function updateParticipantsCards() {
-	  var participants_locations = document.getElementsByClassName('ps_location')[0]
-		participants_locations.innerHTML = ""
-		var ps = document.getElementsByClassName('participant')		
-		for (i = 0; i < ps.length; i++) {
-		var element = ps[i]
-		var box = element.getElementsByClassName("p_chkbox")[0]
-		if(!box.checked) continue;
-		var text = element.innerText || element.textContent;
-			
-			
-			var insertRow = document.createElement('div')
-			insertRow.className = "column card"
-			
-			<!-- row content -->
-			var rowContent =
-			`
-				<h3>${text}</h3>
-				<h3>aaaa</h3>
-			`
-			insertRow.innerHTML = rowContent
-			<!-- var insertSpace = document.createElement('div') -->
-			
-			
-          participants_locations.append(insertRow)
-			
-		}
-	  }
-	  
-	  function createCheckList() {
-      var checkList = document.getElementById('list1');
-      var participants = document.getElementById('participants');
-              checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
-                  if (participants.classList.contains('visible')){
-                      participants.classList.remove('visible');
-                      participants.style.display = "none";
-                  }
-                  
-                  else{
-                      participants.classList.add('visible');
-                      participants.style.display = "block";
-                  }
-                  
-                  
-              }
-      
-              participants.onblur = function(evt) {
-                  participants.classList.remove('visible');
-              }	 			  
-	  }
-      
-      
-      function displayTable() {
-      console.log("Hello world1!");
+		
+			<script>
+				// <!-- global scope -->
+				createCheckList();
+				updateParticipantsCards()
+				console.log(getParticipantsNum())
+				
+				// <!-- functions -->
+        function amountToPayEach() {
+          console.log("amountToPayEach")
+          ps_num = getParticipantsNum()
+          total_price = parseFloat(document.getElementById("total_price").innerHTML)
+          return total_price/ps_num
+        }
+				function getParticipantsNum() {
+          var ps = document.getElementsByClassName('participant')
+          var active_participants = 0
+          for (i = 0; i < ps.length; i++) {
+						var element = ps[i]
+						var box = element.getElementsByClassName("p_chkbox")[0]
+						if(!box.checked) continue;
+						
+						active_participants += 1
+          }
+          return active_participants
+        }
+				function updateParticipantsCards() {
+
+					var participants_locations = document.getElementsByClassName('ps_location')[0]
+					participants_locations.innerHTML = ""
+					var ps = document.getElementsByClassName('participant')
+					var active_participants = 0
+
+          var eachAmount = amountToPayEach()
+
+
+					for (i = 0; i < ps.length; i++) {
+						var element = ps[i]
+						var box = element.getElementsByClassName("p_chkbox")[0]
+						if(!box.checked) continue;
+						
+						active_participants += 1
+						var text = element.innerText || element.textContent;
+						
+						var insertRow = document.createElement('div')
+						insertRow.className = "col-45 card flip-card"
+						insertRow.id =  `participant_${i}`
+            
+						// <!-- row content -->
+						var rowContent =
+						`
+						<div class="flip-card-inner">
+    <div class="flip-card-front"> 
+      <h1>${text}</h1>
+						<h3 class="income each_ps_price">${eachAmount}</h3>
+				</div>
+    <div class="flip-card-back">
+      <h1>${text}</h1>
+						<h3 class="income each_ps_price">${eachAmount}</h3>
+    </div>
+		</div>
+  </div>
+						`
+						insertRow.innerHTML = rowContent					
+						participants_locations.append(insertRow)
+					}
+					// <!-- adding temp 'card' to make the last ticket to be with same size (and not being on the entire row) -->
+					if ((active_participants % 2) == 1) {
+					console.log(ps.length)
+					var tempRow = document.createElement('div')
+					tempRow.className = "col-45"
+					tempRow.innerHTML = ""
+					participants_locations.append(tempRow)					
+					}
+          updateEachAmount()
+				}
+					function updateEachAmount()
+          {
+            var amount = amountToPayEach().toFixed(2)
+          document.getElementById("each_ps_price").innerHTML = amount
+          //gather all 'each price' elements
+          var all_each = document.getElementsByClassName("each_ps_price") 
+          for(var i = 0; i < all_each.length; i++)
+            {
+              all_each[i].innerHTML = amount
+            }
+          }
+					function createCheckList() {
+					var checkList = document.getElementById('list1');
+					var participants = document.getElementById('participants');
+					document.getElementById('ps_anchor').onclick = function (evt) {
+					if (participants.classList.contains('visible')){
+					participants.classList.remove('visible');
+					participants.style.display = "none";
+					}
+					
+					else{
+					participants.classList.add('visible');
+					participants.style.display = "block";
+					}
+					
+					
+					}
+					
+				participants.onblur = function(evt) {
+				participants.classList.remove('visible');
+				}	 			  
+				}
+				
+				
+				function displayTable() {
+				console.log("Hello world1!");
         var x = document.getElementById("bottom_line");
         if (x.style.display === "none") {
-          x.style.display = "block";
+				x.style.display = "block";
         } else {
-          x.style.display = "none";
+				x.style.display = "none";
         }
-      }
-      
-      function addElement(itemName, itemPrice) {
+				}
+				
+				function addElement(itemName, itemPrice) {
       	document.getElementById("error_item_div").innerHTML = ""
       	if (itemName == null || itemName == "") {
-      		console.log(2);
-      		document.getElementById("error_item_div").innerHTML = "!נא לכתוב את שם המוצר"
-      		return
+				console.log(2);
+				document.getElementById("error_item_div").innerHTML = "!נא לכתוב את שם המוצר"
+				return
       	}
       	if (itemPrice == null || itemPrice == "") {
-      		console.log(3);
-      		document.getElementById("error_item_div").innerHTML = "!נא לכתוב את מחיר המוצר"
-      		return
+				console.log(3);
+				document.getElementById("error_item_div").innerHTML = "!נא לכתוב את מחיר המוצר"
+				return
       	}
       	var cartRow = document.createElement('div')
       	var cartItems = document.getElementsByClassName('cart-items')[0]
       	var cartRowContents = `
       	<p>₪ <span class="cart-price">${itemPrice}</span><span class="cart-item"><span class="close">&times;</span><a href="#">${itemName}</a></span></p>`
       	cartRow.innerHTML = cartRowContents
-          cartItems.append(cartRow)
+				cartItems.append(cartRow)
       	
       	setCloseAction()
-      
+				
         update()
-      }
-      
-      function setCloseAction() {
+				}
+				
+        // Adding the ability to close each added item by click the 'x' button
+				function setCloseAction() {
       	var closebtns = document.getElementsByClassName("close");
       	var i;
-      
+				
       	for (i = 0; i < closebtns.length; i++) {
-      	  closebtns[i].addEventListener("click", function() {
-      	  try {
-      		this.parentElement.parentElement.style.display = 'none';
-      		this.parentElement.parentElement.innerHTML = "";
-      		update()
-      		}
-      		catch(err) {
-      		}	
-      	  });
+				closebtns[i].addEventListener("click", function() {
+				try {
+				this.parentElement.parentElement.style.display = 'none';
+				this.parentElement.parentElement.innerHTML = "";
+				update()
+				}
+				catch(err) {
+				}	
+				});
       	}
-      }
-      function update() {
+				}
+				function update() {
       	
-      	<!-- update total items -->
+      	// <!-- update total items -->
       	var cartItems = document.getElementsByClassName('cart-items')[0]
       	var cartItemNames = cartItems.getElementsByClassName('cart-price')
       	document.getElementById("total_items").innerHTML = cartItemNames.length
       	
-      	<!-- update total price -->
+      	// <!-- update total price -->
       	var sum = 0
       	for (var i = 0; i < cartItemNames.length; i++) {
-              sum += parseFloat(cartItemNames[i].innerHTML);
-          }
+				sum += parseFloat(cartItemNames[i].innerHTML);
+				}
       	document.getElementById("total_price").innerHTML = sum.toFixed(2)
-      }
-    </script>
-  </body>
-</html>
+
+        // Update price for each participant
+        updateEachAmount()
+				}
+				</script>
+				</body>
+				</html>								
