@@ -10,7 +10,7 @@
 			.col-20 {-ms-flex: 20%; /* IE10 */ flex: 20%;}
 			.col-33 {-ms-flex: 33%; /* IE10 */ flex: 33%;}
 			.col-40 {-ms-flex: 40%; /* IE10 */ flex: 33%;}
-			.col-45 {-ms-flex: 40%; /* IE10 */ flex: 40%; margin: 10px;}
+			.col-45 {-ms-flex: 25%; /* IE10 */ flex: 25%; margin: 5%;}
 			/* <!-- until here --> */
       body {
       font-family: Arial;
@@ -104,7 +104,7 @@
       span.cart-price {
       color: grey;
       }
-      add_table {
+      noBorders_table {
       border-collapse: collapse;
       }
       input:focus::placeholder {
@@ -221,12 +221,44 @@
 
 .expense {
   color: red;
+  float: left;
+  padding-left: 3%;
 }
 
 .income {
   color: green;
+  float: left;
+  padding-left: 3%;
 }			
-			
+
+.card-item-name {
+  float: right;
+  padding-right: 3%;
+}
+
+.calcs-table {
+  font-family: arial, sans-serif;
+  text-align: right;
+  padding: 3x;
+  /* border-collapse: collapse; */
+  width: 75%;
+  /* display:table-row-group; */
+}
+
+td.calcs-table, th.calcs-table  {
+  border: 1px solid #e20a0a;
+  text-align: right;
+  padding: 8px;
+}
+/* th.calcs-table {
+  border: 1px solid #e20a0a;
+  text-align: right;
+  padding: 1px;
+}
+
+tr.calcs-table:nth-child(even) {
+  background-color: #6e0bdf;
+} */
 			
 		</style>
 	</head>
@@ -277,7 +309,7 @@
           </div>
           <br>
           <div class="bottomLine" id ="bottom_line" style = "display : none;">
-            <table class="add_table">
+            <table class="noBorders_table">
               <tr>
                 <td><input type='text' dir="rtl" placeholder="שם המוצר" id="itemName"/></td>
                 <td>:תיאור/שם</td>
@@ -302,15 +334,95 @@
 				<div id="list1" class="dropdown-check-list" tabindex="100">
 						<span class="anchor" id="ps_anchor">?מי המשתתפים</span>
 						<ul id="participants" class="participants">
-							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />טל</li>
-							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />אפרת</li>
-							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />עידית</li>
-							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() checked />שרי</li>
-							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=updateParticipantsCards() />ישי</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=participantsChanged() checked />טל</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=participantsChanged() checked />אפרת</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=participantsChanged() checked />עידית</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=participantsChanged() checked />שרי</li>
+							<li class="participant"><input type="checkbox" class="p_chkbox" onclick=participantsChanged() />ישי</li>
 						</ul>
 					</div>
           <br>
           <p><b>₪<span id = "each_ps_price">0</span></b><span class="prices" style="color:black"><b>:סה"כ לכל אחד</b></span></p>
+				</div> <!-- end of container -->
+
+        <br>
+				<!-- Special Calculations part -->
+				<div class="container">
+          <div id="more_calcs_button" class="dropdown-check-list" tabindex="100">
+						<span class="anchor" onclick="displaySpecialCalcs()">:לחישובים נוספים</span>
+          </div>
+          <br>
+          <div id ="special_calcs_line" style = "display : none;">
+            <p><span class="prices" style="color:black"><b>:מי חייב למי</b></span></p>
+            <br>
+
+            <table class="noBorders_table">
+              <tr>
+                <td><select id="ps_duty"></select></td>
+                <td>:לחובת</td>
+							</tr>
+              <tr>
+                <td><select id="ps_credit"></select></td>
+                <td>:לזכות</td>
+							</tr>
+              <tr>
+                <td><input dir="rtl" type='text' placeholder="לדוגמה: 0 או 9.90" id="duty_amount"/></td>
+                <td>?כמה</td>
+							</tr>
+              <tr>
+                <td><input dir="rtl" type='text' placeholder="רשות. לדוגמה: עיפרון" id="duty_description"/></td>
+                <td>?על מה</td>
+							</tr>
+							<tr>
+								<td>
+									<button onclick="addDutyClick()">!הוספה</button>
+								</td>
+							</tr>
+						</table>
+            <div style="color:red;" id="error_duty_div"></div>
+            <div>
+              <br>
+              <table id = "calcs_table" class="calcs-table">
+                <tr>
+                  <th>כמה</th>
+                  <th>תיאור</th>
+                  <th>למי</th>
+                  <th>מי</th>
+                  <th></th>
+                </tr>
+                <!-- <tr>
+                  <td>Alfreds Futterkiste</td>
+                  <td>Maria Anders</td>
+                  <td>Germany</td>
+                </tr>
+                <tr>
+                  <td>Centro comercial Moctezuma</td>
+                  <td>Francisco Chang</td>
+                  <td>Mexico</td>
+                </tr>
+                <tr>
+                  <td>Ernst Handel</td>
+                  <td>Roland Mendel</td>
+                  <td>Austria</td>
+                </tr>
+                <tr>
+                  <td>Island Trading</td>
+                  <td>Helen Bennett</td>
+                  <td>UK</td>
+                </tr>
+                <tr>
+                  <td>Laughing Bacchus Winecellars</td>
+                  <td>Yoshi Tannamuri</td>
+                  <td>Canada</td>
+                </tr>
+                <tr>
+                  <td>Magazzini Alimentari Riuniti</td>
+                  <td>Giovanni Rovelli</td>
+                  <td>Italy</td>
+                </tr> -->
+              </table> 
+            </div>
+            </div>
 				</div> <!-- end of container -->
 				
 			</div> <!-- end of 25 -->      
@@ -319,135 +431,290 @@
 		
 			<script>
 				// <!-- global scope -->
+
+        var global_PS_set = new Set()
+
 				createCheckList();
 				updateParticipantsCards()
-				console.log(getParticipantsNum())
-				
+        getAllParticipants()
+        initMoreCalcs()				
 				// <!-- functions -->
-        function amountToPayEach() {
-          console.log("amountToPayEach")
-          ps_num = getParticipantsNum()
-          total_price = parseFloat(document.getElementById("total_price").innerHTML)
-          return total_price/ps_num
+
+        function addDutyClick() {
+          var error_line = document.getElementById("error_duty_div") 
+          error_line.innerHTML = ""
+          var amount = document.getElementById('duty_amount').value
+          
+          if (!validFloatInput(amount)) {
+            error_line.innerHTML = "!נא לכתוב סכום תקין"
+            return
+          }
+          var owes = document.getElementById("ps_duty").value
+          var owed = document.getElementById("ps_credit").value
+
+          if (owes == owed) {
+            error_line.innerHTML = "נא לא לחייב ולזכות אותו אדם"
+            return
+          }
+          amount = parseFloat(amount).toFixed(2)
+          var description = document.getElementById("duty_description").value;
+
+          insertToCalcsTable(owes,owed,amount,description)
+          // var card = document.getElementById(owes)
+          // var contents = card.getElementsByClassName("card_calcs_content")
+          // for (content of contents) {
+          //   var text = `<p><span class="expense each_ps_price">₪ ${amount}</span><span class="card-item-name"><a href="#">:${description}</a></span></p><br>`
+          //   content.innerHTML += text
+          //   // var addRow = document.createElement('div')
+          //   // addRow.innerHTML = text
+          //   // content.append(addRow)      
+          // }
+          redrawCards()
+        //   var cartRow = document.createElement('div')
+      	// var cartItems = document.getElementsByClassName('cart-items')[0]
+      	// var cartRowContents = `
+      	// <p>₪ <span class="cart-price">${itemPrice}</span><span class="cart-item"><span class="close">&times;</span><a href="#">${itemName}</a></span></p>`
+      	// cartRow.innerHTML = cartRowContents
+				// cartItems.append(cartRow)
         }
-				function getParticipantsNum() {
+
+        function redrawCards() {
+          //Clear the content
+          var contents = document.getElementsByClassName("card_calcs_content")
+          for (item of contents) {
+            item.innerHTML = ""
+          }
+
+          //Draw each card according to the calcs table
+          var table = document.getElementById("calcs_table");
+          if (table.rows.length == 0)
+            return;
+
+          for (var i = 1, row; row = table.rows[i]; i++) {
+            var amount = row.cells[0].innerHTML
+            var description = row.cells[1].innerHTML
+            var owed = row.cells[2].innerHTML
+            var owes = row.cells[3].innerHTML
+            var owes_card = document.getElementById(owes)
+            var contents = owes_card.getElementsByClassName("card_calcs_content")
+            for (content of contents) {
+              var text = `<p><span class="expense">₪ ${amount}</span><span class="card-item-name"><a href="#">(${description}) ל${owed}</a></span></p><br>`
+              content.innerHTML += text      
+            }
+            var owed_card = document.getElementById(owed)
+            var contents = owed_card.getElementsByClassName("card_calcs_content")
+            for (content of contents) {
+              var text = `<p><span class="income">₪ ${amount}</span><span class="card-item-name"><a href="#">(${description}) מ${owes}</a></span></p><br>`
+              content.innerHTML += text      
+            }
+          }
+
+        }
+
+        function insertToCalcsTable(owes,owed,amount, description) {
+          var table = document.getElementById("calcs_table");
+          var row = table.insertRow(-1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(0);
+          var cell3 = row.insertCell(0);
+          var cell4 = row.insertCell(0);
+          var cell5 = row.insertCell(-1);
+
+          cell1.innerHTML = owes;
+          cell2.innerHTML = owed;
+          cell3.innerHTML = description;
+          cell4.innerHTML = amount;
+          cell5.innerHTML = "&times"
+          cell5.classList.add("close")  
+          cell5.addEventListener("click", function() {
+            try {
+              var row2 = this.parentNode;
+              row2.parentNode.removeChild(row2);
+              redrawCards()
+            }
+            catch(err) {
+              console.log(err)
+            }	
+            });
+        }
+        function initMoreCalcs() {
+          initMoreCalcsBox('ps_duty') 
+          initMoreCalcsBox('ps_credit')            
+        }
+        function initMoreCalcsBox(element_id) {
+          select = document.getElementById(element_id);
+          select.length = 0
+          for (item of global_PS_set.values()){
+            var opt = document.createElement('option');
+            opt.value = item;
+            opt.innerHTML = item;
+            select.appendChild(opt);
+          }
+        }
+        function participantsChanged() {
+          updateAllParticipants()
+          initMoreCalcs()
+        }
+
+        function updateAllParticipants() {
+          getAllParticipants()
+          updateParticipantsCards()
+        }
+        function getAllParticipants() {
+          global_PS_set.clear()
           var ps = document.getElementsByClassName('participant')
-          var active_participants = 0
           for (i = 0; i < ps.length; i++) {
 						var element = ps[i]
 						var box = element.getElementsByClassName("p_chkbox")[0]
 						if(!box.checked) continue;
-						
-						active_participants += 1
+            var ps_name = element.innerText || element.textContent;
+            global_PS_set.add(ps_name)
           }
-          return active_participants
+          //examples
+          // console.log(global_PS_set.size)
+          // for (item of global_PS_set.values())
+          //   console.log(item)
+          // console.log(global_PS_set.has("אפרת"))
         }
-				function updateParticipantsCards() {
 
-					var participants_locations = document.getElementsByClassName('ps_location')[0]
+        function updateParticipantsCards() {
+          getAllParticipants()
+          var participants_locations = document.getElementsByClassName('ps_location')[0]
 					participants_locations.innerHTML = ""
-					var ps = document.getElementsByClassName('participant')
-					var active_participants = 0
+          var num = 0
 
-          var eachAmount = amountToPayEach()
-
-
-					for (i = 0; i < ps.length; i++) {
-						var element = ps[i]
-						var box = element.getElementsByClassName("p_chkbox")[0]
-						if(!box.checked) continue;
-						
-						active_participants += 1
-						var text = element.innerText || element.textContent;
-						
-						var insertRow = document.createElement('div')
+          for (ps_name of global_PS_set.values()) {
+            num += 1
+            var insertRow = document.createElement('div')
 						insertRow.className = "col-45 card flip-card"
-						insertRow.id =  `participant_${i}`
+						// insertRow.id =  `participant_${i}`
+            // insertRow.id =  `participant_${ps_name}`
+            insertRow.id =  `${ps_name}`
             
-						// <!-- row content -->
-						var rowContent =
-						`
-						<div class="flip-card-inner">
-    <div class="flip-card-front"> 
-      <h1>${text}</h1>
-						<h3 class="income each_ps_price">${eachAmount}</h3>
-				</div>
-    <div class="flip-card-back">
-      <h1>${text}</h1>
-						<h3 class="income each_ps_price">${eachAmount}</h3>
-    </div>
-		</div>
-  </div>
-						`
-						insertRow.innerHTML = rowContent					
+						insertRow.innerHTML = getCardContent(ps_name)					
 						participants_locations.append(insertRow)
-					}
-					// <!-- adding temp 'card' to make the last ticket to be with same size (and not being on the entire row) -->
-					if ((active_participants % 2) == 1) {
-					console.log(ps.length)
+          }
+
+					// Adding temp 'card' to make the last card to be with same size (and not being on the entire row)
+					if ((global_PS_set.size % 2) == 1) {
 					var tempRow = document.createElement('div')
 					tempRow.className = "col-45"
 					tempRow.innerHTML = ""
 					participants_locations.append(tempRow)					
 					}
           updateEachAmount()
-				}
-					function updateEachAmount()
-          {
-            var amount = amountToPayEach().toFixed(2)
+        }
+
+        // Build the entire card, with the wrapping classes
+        function getCardContent(ps_name) {
+            var card_text_content = getCardInnerText(ps_name)
+            
+						var rowContent =
+						`
+						<div class="flip-card-inner">
+              <div class="flip-card-front"> 
+                ${card_text_content}
+				      </div>
+            <div class="flip-card-back">
+              ${card_text_content}
+            </div>
+		        </div>
+            </div>
+						`
+            return rowContent
+        }
+        //The text of each card
+        function getCardInnerText(ps_name) {
+          var eachAmount = amountToPayEach()
+          var card_text_content =
+          `
+            <h1>${ps_name}</h1>
+            <p><span class="expense each_ps_price">₪ ${eachAmount}</span><span class="card-item-name"><a href="#">:קנייה נוכחית</a></span></p>
+            <br>
+            <div class="card_calcs_content"></div>
+          `
+          return card_text_content
+        }
+  
+        function amountToPayEach() {
+          ps_num = global_PS_set.size
+          total_price = parseFloat(document.getElementById("total_price").innerHTML)
+          return total_price/ps_num
+        }
+      
+        function updateEachAmount() {
+          var amount = amountToPayEach().toFixed(2)
           document.getElementById("each_ps_price").innerHTML = amount
           //gather all 'each price' elements
           var all_each = document.getElementsByClassName("each_ps_price") 
-          for(var i = 0; i < all_each.length; i++)
-            {
+          for(var i = 0; i < all_each.length; i++) {
               all_each[i].innerHTML = amount
             }
+        }
+
+        function createCheckList() {
+          var checkList = document.getElementById('list1');
+          var participants = document.getElementById('participants');
+          document.getElementById('ps_anchor').onclick = function (evt) {
+          if (participants.classList.contains('visible')){
+          participants.classList.remove('visible');
+          participants.style.display = "none";
           }
-					function createCheckList() {
-					var checkList = document.getElementById('list1');
-					var participants = document.getElementById('participants');
-					document.getElementById('ps_anchor').onclick = function (evt) {
-					if (participants.classList.contains('visible')){
-					participants.classList.remove('visible');
-					participants.style.display = "none";
-					}
-					
-					else{
-					participants.classList.add('visible');
-					participants.style.display = "block";
-					}
-					
-					
-					}
-					
-				participants.onblur = function(evt) {
-				participants.classList.remove('visible');
-				}	 			  
+          
+          else{
+          participants.classList.add('visible');
+          participants.style.display = "block";
+          }
+          
+          
+          }
+            
+          participants.onblur = function(evt) {
+          participants.classList.remove('visible');
+          }	 			  
 				}
 				
 				
 				function displayTable() {
-				console.log("Hello world1!");
-        var x = document.getElementById("bottom_line");
-        if (x.style.display === "none") {
-				x.style.display = "block";
-        } else {
-				x.style.display = "none";
-        }
+          var x = document.getElementById("bottom_line");
+          if (x.style.display === "none") {
+           x.style.display = "block";
+          } else {
+           x.style.display = "none";
+          }
+				}
+
+        function displaySpecialCalcs() {
+          var x = document.getElementById("special_calcs_line");
+          if (x.style.display === "none") {
+           x.style.display = "block";
+          } else {
+           x.style.display = "none";
+          }
 				}
 				
+        function validFloatInput(x) {
+          var valid = !/^\s*$/.test(x) && !isNaN(x) //Checks valid float input
+          return valid
+        }
+
 				function addElement(itemName, itemPrice) {
-      	document.getElementById("error_item_div").innerHTML = ""
+        var error_line = document.getElementById("error_item_div")
+        error_line.innerHTML = ""
       	if (itemName == null || itemName == "") {
-				console.log(2);
-				document.getElementById("error_item_div").innerHTML = "!נא לכתוב את שם המוצר"
-				return
+          error_line.innerHTML = "!נא לכתוב את שם המוצר"
+				  return
       	}
       	if (itemPrice == null || itemPrice == "") {
-				console.log(3);
-				document.getElementById("error_item_div").innerHTML = "!נא לכתוב את מחיר המוצר"
-				return
+          error_line.innerHTML = "!נא לכתוב את מחיר המוצר"
+				  return
       	}
+        if (!validFloatInput(itemPrice))
+        {
+          error_line.innerHTML = "!נא לכתוב מחיר תקין"
+          return
+        }
+
       	var cartRow = document.createElement('div')
       	var cartItems = document.getElementsByClassName('cart-items')[0]
       	var cartRowContents = `
